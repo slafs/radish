@@ -1,11 +1,9 @@
-README.txt
+HISTORY.txt
+MIT-LICENSE
+README.md
 setup.py
 radish/__init__.py
 radish/dirt.py
-radish/features
-radish/features/admin.feature
-radish/features/admin.py
-radish/features/base.py
-radish/features/__init__.py
 radish/managers.py
-
+radish/settings.py
+radish/features/admin.feature
