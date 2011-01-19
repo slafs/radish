@@ -1,11 +1,13 @@
 from lettuce import *
 from radish.features import base
 
+from django.core.urlresolvers import reverse
+
 # NAVIGATION
 
 @step(u'I navigate to the admin page')
 def i_navigate_to_the_admin_page(step):
-    step.given('I access the URL "/admin/"')
+	step.given('I access the URL "%s"' % (reverse('admin:index')))
 
 @step(u'I am not logged in(?:| as an admin)$')
 def i_am_not_logged_in_as_an_admin(step):
