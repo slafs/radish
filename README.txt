@@ -1,3 +1,12 @@
+Radish
+-------------------------------------
+
+Radish is a set of common tools for testing django projects 
+with lettuce.  The goal of this project is to capture the
+most common test utilities in one place to reduce the time
+it takes to set up BDD on a new project.
+
+
 Radish Settings
 -------------------------------------
 
