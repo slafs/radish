@@ -1,11 +1,9 @@
 from lettuce import before, after, world
 from lettuce.django import django_url
 import os
-from selenium import get_driver, FIREFOX, IE, CHROME, REMOTE
+from selenium import get_driver
 
-from django.conf import settings
-
-BROWSER = getattr(settings,'RADISH_BROWSER',FIREFOX)
+from radish.settings import *
 
 @before.harvest
 def prepare_browser_driver(variables):

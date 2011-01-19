@@ -1,5 +1,6 @@
 from lettuce import *
 from radish.features import base
+from radish.settings import *
 
 from django.core.urlresolvers import reverse
 
@@ -20,8 +21,8 @@ def i_am_logged_in_as_an_admin(step):
     try:
         step.given('I should see the administration panel')
     except:
-        step.given('I fill the "username" field with "admin"')
-        step.given('I fill the "password" field with "admin"')
+        step.given('I fill the "username" field with "%s"' % ADMIN_LOGIN)
+        step.given('I fill the "password" field with "%s"' % ADMIN_PASSWORD)
         step.given('I click the "Log in" button')
 
 # PAGE ELEMENTS

@@ -26,6 +26,17 @@ LETTUCE_APPS = ('radish',...)
 Don't forget to include other apps that you are testing with
 lettuce and that rely on radish.
 
+To log in as a superuser into the django admin you'll want to
+create a superuser account and put those credentials in the
+settings_test.py file.  Radish will use these to log in, or
+default to the username/password of admin/admin:
+
+RADISH_ADMIN_LOGIN = 'admin'
+RADISH_ADMIN_PASSWORD = 'admin'
+
+Please be warned, shipping your code with this superuser is 
+highly discouraged.
+
 
 Terrain.py
 -------------------------------------
