@@ -6,11 +6,13 @@ import re
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
 from urllib import urlretrieve
+from random_instances import get_or_create_random
 
 from django.contrib.comments import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.core.mail import outbox
 from django.utils.html import strip_tags
+from django.db import models
 
 # MODELS
 
@@ -20,9 +22,6 @@ def no_instances(step, model_name, options):
 	kwargs = eval(options or '{}') # e.g.: extract {"is_current": True}
 	model.objects.filter(**kwargs).delete()
 	if model_name in world.instances: del(world.instances[model_name])
-
-def get_or_create_random(model, **kwargs):
-	return model.objects.get(**kwargs)
 
 @step(u'there is an instance of (.+?)(?:| with (.+))$')
 def there_is_an_instance(step, model_name, options):
