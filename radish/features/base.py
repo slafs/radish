@@ -30,11 +30,14 @@ def there_is_an_instance(step, model_name, options):
 	kwargs = eval(options or '{}') # e.g.: extract {"is_current": True}
 	world.instances[model_name] = get_or_create_random(model,**kwargs)
 
-@step(u'there should be (\d+) instances of (.+)')
+@step(u'there should be (?:many|(\d+)) instances of (.+)')
 def should_have_n_instances(step, count, model_name):
 	model = ContentType.objects.get(model=model_name.lower()).model_class()
-	assert_equals(model.objects.count(), int(count))
- 
+	model_count = model.objects.count()
+	if count:
+		assert_equals(model_count, int(count))
+	assert_true(model_count >= 1)
+
 # FORMS
 
 @step(u'I fill the "(.*)" field with "(.*)"')
@@ -54,7 +57,7 @@ def i_fill_the_field_with_two_values(step, name, value1, value2):
 def the_field_has_value(step, name, value):
 	field = world.browser.find_element_by_name(name)
 	field_val = field.get_value()
-	assert_true(value,str(field_val))
+	assert_true(value==str(field_val))
 
 @step(u'I select that (.+?) for the "(.*)" field')
 def i_select_that_instance(step, model_name, field):
