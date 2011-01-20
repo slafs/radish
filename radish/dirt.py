@@ -1,6 +1,7 @@
 from lettuce import before, after, world
 from lettuce.django import django_url
 import os
+from pdb import set_trace
 from selenium import get_driver
 from selenium.remote.webelement import WebElement
 from selenium.remote.webdriver import WebDriver
@@ -31,6 +32,8 @@ def shutdown_browser_driver(results):
 @after.each_scenario
 def screenshot_on_error(scenario):
 	if scenario.failed:
+		if DEBUG:
+			set_trace()
 		world.browser.save_screenshot("tmp/last_failed_scenario.png")
 
 ##### Useful functions added to Selenium ones
