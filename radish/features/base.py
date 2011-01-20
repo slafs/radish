@@ -21,11 +21,14 @@ def no_instances(step, model_name, options):
 	model.objects.filter(**kwargs).delete()
 	if model_name in world.instances: del(world.instances[model_name])
 
+def get_or_create_random(model, **kwargs):
+	return model.objects.get(**kwargs)
+
 @step(u'there is an instance of (.+?)(?:| with (.+))$')
 def there_is_an_instance(step, model_name, options):
 	model = ContentType.objects.get(model=model_name.lower()).model_class()
 	kwargs = eval(options or '{}') # e.g.: extract {"is_current": True}
-	world.instances[model_name] = model.objects.get_or_create_random(**kwargs)
+	world.instances[model_name] = get_or_create_random(model,**kwargs)
 
 @step(u'there should be (\d+) instances of (.+)')
 def should_have_n_instances(step, count, model_name):
