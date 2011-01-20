@@ -43,6 +43,12 @@ def i_fill_the_field_with_value(step, name, value):
 	field.clear()
 	field.send_keys(value)
 
+@step(u'the "(.*)" field should have value "(.*)"')
+def the_field_has_value(step, name, value):
+	field = world.browser.find_element_by_name(name)
+	field_val = field.get_value()
+	assert_true(value,str(field_val))
+
 @step(u'I select that (.+?) for the "(.*)" field')
 def i_select_that_instance(step, model_name, field):
 	value = world.instances[model_name].__unicode__()
