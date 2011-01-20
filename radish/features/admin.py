@@ -29,4 +29,4 @@ def i_am_logged_in_as_an_admin(step):
 
 @step(u'I should see the administration panel')
 def i_am_on_the_administration_panel(step):
-    step.given('I should see the message "Welcome, admin"')
+    step.given('I should see the message "Site administration"')
