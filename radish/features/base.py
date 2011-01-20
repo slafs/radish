@@ -55,9 +55,9 @@ def i_select_that_instance(step, model_name, field):
 	step.given('I select the "%s" option for the "%s" field' % (value, field))
 
 @step(u'I select (?:|the )"(.*)" (?:|option )(?:for|from) (?:|the )"(.*)"(?:| field)$')
-def i_select_the_option_for_field(step, value, select_name):
+def i_select_the_option_for_field(step, text, select_name):
 	select = world.browser.find_element_by_name(select_name)
-	option = select.find_element_by_xpath('option[text() = "%s"]' % value)
+	option = select.find_element_by_tag_name_and_text('option', text)
 	option.set_selected()
 
 @step(u"I check the field of that (.+)$")
@@ -76,7 +76,7 @@ def i_click_the_button(step, value_or_text):
 	try: # NOTE: Is there an XPATH to avoid this try?
 		button = world.browser.find_element_by_xpath('//input[@value="%s"]' % value_or_text)
 	except NoSuchElementException: # maybe it's a <button> ...
-		button = world.browser.find_element_by_xpath('//button[text() = "%s"]' % value_or_text)
+		button = world.browser.find_element_by_tag_name_and_text('//button', value_or_text)
 	button.click()
 
 # NAVIGATION
