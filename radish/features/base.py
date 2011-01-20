@@ -43,6 +43,13 @@ def i_fill_the_field_with_value(step, name, value):
 	field.clear()
 	field.send_keys(value)
 
+@step(u'I fill the "(.*)" field with "(.*)" and "(.*)"')
+def i_fill_the_field_with_two_values(step, name, value1, value2):
+	name1 = '%s_0' % name
+	step.given('I fill the "%s" field with "%s"' % (name1, value1))
+	name2 = '%s_1' % name
+	step.given('I fill the "%s" field with "%s"' % (name2, value2))
+
 @step(u'the "(.*)" field should have value "(.*)"')
 def the_field_has_value(step, name, value):
 	field = world.browser.find_element_by_name(name)
