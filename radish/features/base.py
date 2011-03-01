@@ -187,7 +187,7 @@ def i_should_see_the_text(step, should_not, text):
 	else:
 		assert text in page_text
 		
-@step(u'I should see "(.*)" (in|as) the "(.*)"(?:| tag)')
+@step(u'I should see "(.*)" (in|as) the "(.*?)"(?:| tag)')
 def i_should_see_the_text_in_the_tag(step, text, in_as, tag_name):
 	page_text = world.browser.find_element_by_tag_name(tag_name).get_text()
 	if in_as == 'as':
@@ -195,7 +195,7 @@ def i_should_see_the_text_in_the_tag(step, text, in_as, tag_name):
 	elif in_as == 'in':
 		assert text in page_text
 
-@step(u'I should see "(.*)" (in|as) the "(.*)" element')
+@step(u'I should see "(.*)" (in|as) the "(.*?)" element')
 def i_should_see_the_text_in_the_element(step, text, in_as, element_id):
 	page_text = world.browser.find_element_by_id(element_id).get_text()
 	if in_as == 'as':
