@@ -10,13 +10,6 @@ it takes to set up BDD on a new project.
 Radish Settings
 ====================================
 
-Radish let's you define which browser you'd like to use
-for testing in Lettuce.  Set the following in your settings.py
-file:
-
-    RADISH_BROWSER = 'firefox'
-
-You can choose from 'firefox', 'ie', 'chrome', or 'remote'. 
 The default browser used by Radish is 'firefox'.
 
 You will also need to define LETTUCE_APPS to include radish:

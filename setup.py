@@ -1,12 +1,10 @@
-
-
 from distutils.core import setup
 
 setup(
     name = "radish",
     packages = ["radish"],
-    package_data={'radish': ['features/*.feature']},
-    version = "0.1.1",
+    package_data={'radish': ['features/*.*']},
+    version = "0.1.3",
     description = "A set of common tools for testing django projects with lettuce.",
     author = "Red Interactive",
     author_email = "geeks@ff0000.com",
@@ -39,3 +37,5 @@ more rapidly, since they do not have to write the step definitions, which are
 included in this module.
 """
 )
+
+# To create the package: python setup.py register sdist upload

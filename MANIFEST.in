@@ -1,4 +1,4 @@
-recursive-include radish/features *.feature
+recursive-include radish/features *.*
 include README.md
 include MIT-LICENSE
 include HISTORY.txt

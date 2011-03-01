@@ -3,7 +3,7 @@ from nose.tools import assert_equals, assert_false, assert_true
 from os.path import basename, exists
 from pdb import set_trace
 import re
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.exceptions import NoSuchElementException
 from time import sleep
 from urllib import urlretrieve
 from random_instances import get_or_create_random
@@ -85,7 +85,7 @@ def i_click_the_button(step, value_or_text):
 	try: # NOTE: Is there an XPATH to avoid this try?
 		button = world.browser.find_element_by_xpath('//input[@value="%s"]' % value_or_text)
 	except NoSuchElementException: # maybe it's a <button> ...
-		button = world.browser.find_element_by_tag_name_and_text('//button', value_or_text)
+		button = world.browser.find_element_by_tag_name_and_text('//input', value_or_text)
 	button.click()
 
 # NAVIGATION
