@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 
 @step(u'I navigate to the admin page')
 def i_navigate_to_the_admin_page(step):
-	step.given('I access the URL "%s"' % (reverse('admin:index')))
+    step.given('I access the URL "%s"' % (reverse('admin:index')))
 
 @step(u'I am not logged in(?:| as an admin)$')
 def i_am_not_logged_in_as_an_admin(step):
