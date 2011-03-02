@@ -52,40 +52,41 @@ def i_fill_the_field_with_two_values(step, name, value1, value2):
 	name2 = '%s_1' % name
 	step.given('I fill the "%s" field with "%s"' % (name2, value2))
 
-@step(u'the "(.*)" field should have value "(.*)"')
+@step(u'the "(.+)" field should have value "(.+)"')
 def the_field_has_value(step, name, value):
 	field = world.browser.find_element_by_name(name)
 	field_val = field.get_value()
 	assert_true(value==str(field_val))
 
-@step(u'I select that (.+?) for the "(.*)" field')
+@step(u'I select that instance of (.+?) from "(.+)"')
 def i_select_that_instance(step, model_name, field):
 	value = world.instances[model_name].__unicode__()
-	step.given('I select the "%s" option for the "%s" field' % (value, field))
+	step.given('I select "%s" from "%s"' % (value, field))
 
-@step(u'I select (?:|the )"(.*)" (?:|option )(?:for|from) (?:|the )"(.*)"(?:| field)$')
+@step(u'I select "(.+)" from "(.+)"$')
 def i_select_the_option_for_field(step, text, select_name):
 	select = world.browser.find_element_by_name(select_name)
-	option = select.find_element_by_tag_name_and_text('option', text)
-	option.set_selected()
+    # NOTE: This does not work if text contains quotes like "
+	option = select.find_element_by_xpath('%s[text() = "%s"]' % ('option', text))
+	option.select()
 
 @step(u"I check the field of that (.+)$")
 def i_check_that_instance(step, model_name):
 	pk = world.instances[model_name].id
 	checkbox = world.browser.find_element_by_xpath('//input[@type="checkbox" and @value="%s"]' % pk)
-	checkbox.set_selected()
+	checkbox.select()
 
-@step(u'I check the "(.*)" field')
+@step(u'I check the "(.+)" field')
 def i_check_the_field(step, name):
 	field = world.browser.find_element_by_name(name)
-	field.set_selected()
+	field.select()
 
 @step(u'I click (?:|on )the "(.*)" button')
 def i_click_the_button(step, value_or_text):
 	try: # NOTE: Is there an XPATH to avoid this try?
 		button = world.browser.find_element_by_xpath('//input[@value="%s"]' % value_or_text)
 	except NoSuchElementException: # maybe it's a <button> ...
-		button = world.browser.find_element_by_tag_name_and_text('//input', value_or_text)
+		button = world.browser.find_element_by_xpath('%s[text() = "%s"]' % ('//button', value_or_text))
 	button.click()
 
 # NAVIGATION
@@ -189,7 +190,7 @@ def i_should_see_the_text(step, should_not, text):
 		
 @step(u'I should see "(.*)" (in|as) the "(.*?)"(?:| tag)')
 def i_should_see_the_text_in_the_tag(step, text, in_as, tag_name):
-	page_text = world.browser.find_element_by_tag_name(tag_name).get_text()
+	page_text = world.browser.find_element_by_tag_name(tag_name).text
 	if in_as == 'as':
 		assert_equals(page_text, text)
 	elif in_as == 'in':
@@ -197,7 +198,7 @@ def i_should_see_the_text_in_the_tag(step, text, in_as, tag_name):
 
 @step(u'I should see "(.*)" (in|as) the "(.*?)" element')
 def i_should_see_the_text_in_the_element(step, text, in_as, element_id):
-	page_text = world.browser.find_element_by_id(element_id).get_text()
+	page_text = world.browser.find_element_by_id(element_id).text
 	if in_as == 'as':
 		assert_equals(page_text, text)
 	elif in_as == 'in':
@@ -209,11 +210,6 @@ def i_should_see_the_text_in_the_element(step, text, in_as, element_id):
 def email_sent(step, recipient_email):
 	recipients = [rcpt for msg in outbox for rcpt in msg.to]
 	assert recipient_email in recipients
-
-@step(u"an email should be sent to the (.+?) of that (.+)$")
-def an_email_should_be_sent(step, parent_name, model_name):
-	email = eval('world.instances["%s"].%s.email' % (model_name, parent_name))
-	step.given('an email should be sent to "%s"' % email)
 
 # DEBUG
 

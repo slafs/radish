@@ -16,15 +16,6 @@ def prepare_browser_driver(variables):
     if not os.path.exists('tmp'): # to store local images and screenshots
         os.mkdir('tmp')
     
-    ##### Useful functions added to Selenium ones
-    # """Finds an element by its name and the included text."""
-    world.browser.find_element_by_tag_name_and_text = lambda name, text: \
-        world.browser.find_element_by_xpath('%s[text() = "%s"]' % (name, text))
-    
-    # """Finds elements by their name and the included text."""
-    world.browser.find_elements_by_tag_name_and_text = lambda name, text: \
-        world.browser.find_elements_by_xpath('%s[text() = "%s"]' % (name, text))
-
 @after.harvest
 def shutdown_browser_driver(results):
     # NOTE: A bug in selenium2.05b causes an output error at this point:
