@@ -1,6 +1,6 @@
 HISTORY.txt
 MIT-LICENSE
-README.md
+README.markdown
 setup.py
 radish/__init__.py
 radish/dirt.py
