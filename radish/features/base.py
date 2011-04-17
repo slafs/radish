@@ -3,7 +3,7 @@ from nose.tools import assert_equals, assert_false, assert_true
 from os.path import basename, exists
 from pdb import set_trace
 import re
-from selenium.webdriver.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException
 from time import sleep
 from urllib import urlretrieve
 from random_instances import get_or_create_random
