@@ -181,7 +181,7 @@ def i_should_see_that_attribute(step, attr_name, model_name, as_in, tag_name, el
 @step(u'I should(| not) see the (?:message|text) "(.*?)"$')
 def i_should_see_the_text(step, should_not, text):
     text = re.sub('\\\\"', '"', text) # Fix double quotes
-    page_html = world.browser.get_page_source()
+    page_html = world.browser.page_source
     page_text = re.sub('\s+', ' ', strip_tags(page_html)) # Strip HTML and \n
     if should_not:
         assert text not in page_text
