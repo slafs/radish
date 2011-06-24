@@ -95,12 +95,12 @@ def i_click_the_button(step, value_or_text):
 def access_url(step, url):
     world.browser.get(world.root_url + url)
 
-@step(u"I navigate to the page of that (.+)$")
+@step(u"I navigate (?:|to )the page of that (.+)$")
 def i_navigate_to_that_instance_page(step, model_name):
     url = world.instances[model_name].get_absolute_url()
     step.given('I access the URL "%s"' % url)
 
-@step(u"I navigate to the page of the (.+?) of that (.+)$")
+@step(u"I navigate (?:|to )the page of the (.+?) of that (.+)$")
 def i_navigate_to_that_parent_instance_page(step, parent_name, model_name):
     url = eval('world.instances["%s"].%s.get_absolute_url()' % (model_name, parent_name))
     step.given('I access the URL "%s"' % url)
