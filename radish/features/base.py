@@ -122,6 +122,10 @@ def i_wait(step, seconds):
 def i_navigate_to_the_admin_page(step):
     step.given('I access the URL "/"')
 
+@step(u'I should see a(?:n|) "(.*)" link')
+def then_i_should_see_a_group1_link(step, link_text):
+    link = world.browser.find_element_by_link_text(link_text)
+
 @step(u'I click (?:|on )the "(.*)" link(| if exists)$')
 def i_click_the_link_if_exists(step, link_text, if_exists):
     try:
