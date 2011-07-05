@@ -45,6 +45,13 @@ def i_fill_the_field_with_value(step, name, value):
     field.clear()
     field.send_keys(value)
 
+@step(u'I fill the field labell?ed "(.*)" with "(.*)"')
+def i_fill_the_field_with_value(step, label, value):
+    pattern = '//input[@id=(//label[text() = "%s"]/@for)]'
+    field = world.browser.find_element_by_xpath(pattern % label)
+    field.clear()
+    field.send_keys(value)
+
 @step(u'I fill the "(.*)" field with "(.*)" and "(.*)"')
 def i_fill_the_field_with_two_values(step, name, value1, value2):
     name1 = '%s_0' % name
