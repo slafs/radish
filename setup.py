@@ -4,7 +4,7 @@ setup(
     name = "radish",
     packages = ["radish"],
     package_data={'radish': ['features/*.*']},
-    version = "0.1.7",
+    version = "0.1.8",
     requires = ['random_instances', 'selenium'],
     install_requires = ['random_instances', 'selenium'],
     description = "A set of common tools for testing django projects with lettuce.",
