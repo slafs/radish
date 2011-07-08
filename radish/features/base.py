@@ -52,6 +52,13 @@ def i_fill_the_field_with_value(step, label, value):
     field.clear()
     field.send_keys(value)
 
+@step(u'I fill with "(.*)" the field with placeholder "(.*)"')
+def i_fill_the_field_with_placeholder(step, value, placeholder):
+    pattern = '//input[@placeholder="%s"]'
+    field = world.browser.find_element_by_xpath(pattern % placeholder)
+    field.clear()
+    field.send_keys(value)
+
 @step(u'I fill the "(.*)" field with "(.*)" and "(.*)"')
 def i_fill_the_field_with_two_values(step, name, value1, value2):
     name1 = '%s_0' % name
