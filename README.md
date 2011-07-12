@@ -1,3 +1,7 @@
+TODO
+====================================
+* Make steps text configurable/translatable
+
 Radish
 ====================================
 
